@@ -1,0 +1,91 @@
+{
+    "name for nav": "</Pranav Dalve/>",
+    "name": "Pranav Dalve",
+    "role": "Backend Developer",
+    "bio": "Backend developer who loves clean code, solving real problems, and learning fast.",
+    "email": "pranavudalve@gamil.com",
+    "linkedin": "https://www.linkedin.com/in/pranavdalve",
+    "instagram": "@dalvepranav",
+    "phone": "7888295202",
+    "portfolio": "https://yourportfolio.com",
+    "skills": [
+      { "name": "JavaScript", "image": "/skills/javascript.png" },
+      { "name": "OOP in JavaScript", "image": "/skills/oop.png" },
+      { "name": "Node.js", "image": "/skills/nodejs.png" },
+      { "name": "Express.js", "image": "/skills/express.png" },
+      { "name": "MongoDB", "image": "/skills/mongodb.png" },
+      { "name": "SQL", "image": "/skills/sql.png" }
+    ],
+    "projects": [
+      {
+        "title": "Component Equivalency Finder Web Application",
+        "description": "A web app to find electronic part equivalents for sourcing.",
+        "points": [
+          "Built a Node.js-based web app to match manufacturer codes with in-house equivalents.",
+          "Integrated third-party APIs for real-time component data.",
+          "Implemented full CRUD and file export features for reporting.",
+          "Used Python, Node.js, JavaScript, and MongoDB for backend development."
+        ]
+      },
+      {
+        "title": "Comprehensive Fitness Club Management System",
+        "description": "Web app to manage gym memberships and plans.",
+        "points": [
+          "Developed RESTful APIs with Node.js and Express for diet/fitness plans.",
+          "Managed MongoDB database for user and plan storage.",
+          "Integrated backend with React frontend via APIs."
+        ]
+      },
+      {
+        "title": "Hospital Management System",
+        "description": "Java and SQL-based system for hospital records.",
+        "points": [
+          "Designed Java-based frontend for tracking beds and medicines.",
+          "Used SQL for storing and retrieving hospital data.",
+          "Connected Java and SQL with JDBC."
+        ]
+      }
+    ],
+
+    "education": [
+      {
+        "degree": "B.Tech in Electronics and Telecommunication",
+        "institution": "Vishwakarma Institute of Technology",
+        "duration": "01/2020 – 05/2024",
+        "location": "Pune"
+      },
+      {
+        "degree": "Junior College",
+        "institution": "G.H. Raisoni Junior College",
+        "duration": "2018 – 2020",
+        "location": "Pune"
+      },
+      {
+        "degree": "CBSE Program",
+        "institution": "Lexicon International School",
+        "duration": "2016 – 2018",
+        "location": "Pune"
+      }
+    ],
+
+    "connect": [
+      {
+        "type": "Email",
+        "image": "/skills/email.png",
+        "value": "pranavudalve@gmail.com"
+      },
+      {
+        "type": "LinkedIn",
+        "image": "/skills/linkedin.png",
+        "value": "www.linkedin.com/in/pranavdalve"
+      },
+      {
+        "type": "Phone",
+        "image": "/skills/phone.png",
+        "value": "+91 7888295202"
+      }
+    ]
+    
+    
+  }
+  
