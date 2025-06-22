@@ -1,103 +1,16 @@
-// import Head from 'next/head';
-// import fs from 'fs';
-// import path from 'path';
-
-// export default function Home({ data }) {
-//   return (
-//     <>
-//       <Head>
-//         <title>{data.name} | {data.role}</title>
-//         <link
-//           rel="stylesheet"
-//           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-//           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-//           crossOrigin="anonymous"
-//           referrerPolicy="no-referrer"
-//         />
-//         <link
-//           href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-//           rel="stylesheet"
-//         />
-//       </Head>
-
-//       {/* Navbar */}
-//       <div className="navbar">
-//         <div className="nav-left">My Porfolio</div>
-//         <div className="nav-icons">
-//           <div className="icon-with-label">
-//             <i className="fa-solid fa-code icon-animated"></i>
-//             <span className="icon-label">Skills</span>
-//           </div>
-//           <div className="icon-with-label">
-//             <i className="fa-solid fa-diagram-project icon-animated"></i>
-//             <span className="icon-label">Projects</span>
-//           </div>
-//           <div className="icon-with-label">
-//             <i className="fa-solid fa-user-group icon-animated"></i>
-//             <span className="icon-label">Let's Connect</span>
-//           </div>
-//           <div className="icon-with-label">
-//             <i className="fa-solid fa-file icon-animated"></i>
-//             <span className="icon-label">Resume</span>
-//           </div>
-//         </div>
-//       </div>
-
-
-//       {/* Hero Section */}
-//       <div className="hero-container">
-//         <div className="hero-left-wrapper">
-//           <div className="hero-left">
-//             <img src="/me.jpg" alt={data.name} className="hero-image" />
-//           </div>
-//         </div>
-//         <div className="hero-right">
-//           <h1 className="hero-title">
-//             I'm <span className="highlight">{data.name}</span><br />
-//             A {data.role}
-//           </h1>
-//           <p className="hero-bio">"{data.bio}"</p>
-//         </div>
-//       </div>
-
-//       {/* Skills Section */}
-//       <div className="skills-section">
-//         <h2 className="section-title">Skills</h2>
-//         <div className="skills-grid">
-//           {data.skills.map((skill, index) => (
-//             <div className="skill-card" key={index}>
-//               <img src={skill.image} alt={skill.name} className="skill-image" />
-//               <p className="skill-name">{skill.name}</p>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-// export async function getStaticProps() {
-//   const filePath = path.join(process.cwd(), 'data.json');
-//   const jsonData = fs.readFileSync(filePath, 'utf8');
-//   const data = JSON.parse(jsonData);
-
-//   return {
-//     props: {
-//       data
-//     }
-//   };
-// }
-
-
 import Head from 'next/head';
 import fs from 'fs';
 import path from 'path';
+import { useState } from 'react';
 
 export default function Home({ data }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
       <Head>
-        <title>{data.name} | {data.role}</title>
+        <title>{data.myname}</title>
+        <link rel="icon" href="/skills/title-logo.png"/>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -118,16 +31,23 @@ export default function Home({ data }) {
 
       {/* Navbar */}
       <div className="navbar">
-        <div className="nav-left">My Portfolio</div>
-        <div className="nav-icons">
+        <div className="nav-left">
+          <img src={data.logo} alt="logo" className="nav-logo" />
+        </div>
+
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <i className="fas fa-bars"></i>
+        </div>
+
+        <div className={`nav-icons ${menuOpen ? 'open' : ''}`}>
           <a href="#skills" className="icon-with-label">
             <i className="fa-solid fa-code icon-animated"></i>
             <span className="icon-label">Skills</span>
           </a>
-          <a href="#education" className="icon-with-label">
-            <i class="fa-solid fa-book"></i>
+          {/* <a href="#education" className="icon-with-label">
+            <i className="fa-solid fa-book icon-animated"></i>
             <span className="icon-label">Education</span>
-          </a>
+          </a> */}
           <a href="#projects" className="icon-with-label">
             <i className="fa-solid fa-diagram-project icon-animated"></i>
             <span className="icon-label">Projects</span>
@@ -136,7 +56,7 @@ export default function Home({ data }) {
             <i className="fa-solid fa-user-group icon-animated"></i>
             <span className="icon-label">Let's Connect</span>
           </a>
-          <a href="#resume" className="icon-with-label">
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="icon-with-label">
             <i className="fa-solid fa-file icon-animated"></i>
             <span className="icon-label">Resume</span>
           </a>
@@ -145,22 +65,25 @@ export default function Home({ data }) {
 
       {/* Hero Section */}
       <div className="hero-container">
-        <div className="hero-left-wrapper">
-          <div className="hero-left">
-            <img src="/me.jpg" alt={data.name} className="hero-image" />
+        <div className="hero-content">
+          <img src="/me.jpg" alt={data.name} className="hero-image" />
+          
+          <div className="hero-text">
+            <h1 className="hero-title">
+              Hey there<br></br> I'm <span className="highlight">{data.name}</span><br />
+              A {data.role}
+            </h1>
+            <p className="hero-bio">"{data.bio}"</p>
           </div>
-        </div>
-        <div className="hero-right">
-          <h1 className="hero-title">
-            I'm <span className="highlight">{data.name}</span><br />
-            A {data.role}
-          </h1>
-          <p className="hero-bio">"{data.bio}"</p>
+          <a className="hero-icon">
+             <i class="fa-solid fa-angle-down fa-flip"></i>
+          </a>
         </div>
       </div>
 
+
       {/* Education Section */}
-      <div className="education-section" id="education">
+      {/* <div className="education-section" id="education">
         <h2 className="education-title">My Academic Journey</h2>
         <div className="education-grid">
           {data.education.map((edu, index) => {
@@ -180,7 +103,7 @@ export default function Home({ data }) {
             );
           })}
         </div>
-      </div>
+      </div> */}
 
 
       {/* Skills Section */}

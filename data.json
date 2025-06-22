@@ -1,13 +1,14 @@
 {
-    "name for nav": "</Pranav Dalve/>",
-    "name": "Pranav Dalve",
+    "myname": "Pranav Dalve",
+    "name": "</Pranav Dalve/>",
     "role": "Backend Developer",
-    "bio": "Backend developer who loves clean code, solving real problems, and learning fast.",
+    "bio": "Backend developer who loves clean code, solving real problems, and learning.",
     "email": "pranavudalve@gamil.com",
     "linkedin": "https://www.linkedin.com/in/pranavdalve",
     "instagram": "@dalvepranav",
     "phone": "7888295202",
     "portfolio": "https://yourportfolio.com",
+    "logo": "/skills/logo.jpg",
     "skills": [
       { "name": "JavaScript", "image": "/skills/javascript.png" },
       { "name": "OOP in JavaScript", "image": "/skills/oop.png" },
