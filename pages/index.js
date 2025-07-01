@@ -1,10 +1,49 @@
 import Head from 'next/head';
 import fs from 'fs';
 import path from 'path';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import parse from 'html-react-parser';
+import { style } from 'framer-motion/client';
+import emailjs from '@emailjs/browser';
+
+// const form = useRef();
 
 export default function Home({ data }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const form = useRef();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const closeModal = () => {
+    setIsModalOpen(false);  // or whatever state you're using to control the modal
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      'service_t37at9q',
+      'template_cv6q7wd',
+      form.current,
+      'PmraW1QRrbJ76_sTM'
+    ).then(
+      () => {
+        alert('Message sent!');
+        setIsModalOpen(false);
+      },
+      () => {
+        alert('Failed to send message.');
+      }
+    );
+  };
+
+  const clearForm = () => {
+    if (form.current) {
+      form.current.reset();
+    }
+  };
+
 
   return (
     <>
@@ -22,6 +61,7 @@ export default function Home({ data }) {
           href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
           rel="stylesheet"
         />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu|Lora"></link>
         <style>{`
           html {
             scroll-behavior: smooth;
@@ -35,33 +75,42 @@ export default function Home({ data }) {
           <img src={data.logo} alt="logo" className="nav-logo" />
         </div>
 
-        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-          <i className="fas fa-bars"></i>
-        </div>
+        {/* Hoverable Menu Wrapper */}
+        <div
+          className="menu-wrapper"
+          onMouseEnter={() => setMenuOpen(true)}
+          onMouseLeave={() => setMenuOpen(false)}
+        >
+          <div className="hamburger">
+            <i className="fas fa-bars"></i>
+          </div>
 
-        <div className={`nav-icons ${menuOpen ? 'open' : ''}`}>
-          <a href="#skills" className="icon-with-label">
-            <i className="fa-solid fa-code icon-animated"></i>
-            <span className="icon-label">Skills</span>
-          </a>
-          {/* <a href="#education" className="icon-with-label">
-            <i className="fa-solid fa-book icon-animated"></i>
-            <span className="icon-label">Education</span>
-          </a> */}
-          <a href="#projects" className="icon-with-label">
-            <i className="fa-solid fa-diagram-project icon-animated"></i>
-            <span className="icon-label">Projects</span>
-          </a>
-          <a href="#connect" className="icon-with-label">
-            <i className="fa-solid fa-user-group icon-animated"></i>
-            <span className="icon-label">Let's Connect</span>
-          </a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="icon-with-label">
-            <i className="fa-solid fa-file icon-animated"></i>
-            <span className="icon-label">Resume</span>
-          </a>
+          <div className={`nav-icons ${menuOpen ? 'open' : ''}`}>
+            <a href="#skills" className="icon-with-label">
+              <i className="fa-solid fa-code icon-animated"></i>
+              <span className="icon-label">Tech Stack</span>
+            </a>
+            <a href="#projects" className="icon-with-label">
+              <i className="fa-solid fa-diagram-project icon-animated"></i>
+              <span className="icon-label">My Projects</span>
+            </a>
+            <a href="#connect" className="icon-with-label">
+              <i className="fa-solid fa-user-group icon-animated"></i>
+              <span className="icon-label">Let's Connect</span>
+            </a>
+            <a
+              href="Pranav_Dalve_resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-with-label"
+            >
+              <i className="fa-solid fa-file icon-animated"></i>
+              <span className="icon-label">Resume</span>
+            </a>
+          </div>
         </div>
       </div>
+
 
       {/* Hero Section */}
       <div className="hero-container">
@@ -81,135 +130,237 @@ export default function Home({ data }) {
         </div>
       </div>
 
-
-      {/* Education Section */}
-      {/* <div className="education-section" id="education">
-        <h2 className="education-title">My Academic Journey</h2>
-        <div className="education-grid">
-          {data.education.map((edu, index) => {
-            const icons = [
-              "fa-user-graduate",    // For B.Tech
-              "fa-building-columns", // For Junior College
-              "fa-school"            // For School
-            ];
-
-            return (
-              <div className="education-card" key={index}>
-                <i className={`fa-solid ${icons[index]} education-icon`}></i>
-                <p className="education-degree">{edu.degree}</p>
-                <p className="education-institute">{edu.institution}</p>
-                <p className="education-dates">{edu.duration} | {edu.location}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div> */}
-
-
       {/* Skills Section */}
       <div className="skills-section" id="skills">
-        <h2 className="section-title">Skills</h2>
-        <p className="section-subtitle">Technologies I've worked with</p>
-        <div className="skills-grid">
-          {data.skills.map((skill, index) => (
-            <div className="skill-card" key={index}>
-              <img src={skill.image} alt={skill.name} className="skill-image" />
-              <p className="skill-name">{skill.name}</p>
+        <h2 className="section-title">Me & My Stack</h2>
+
+        <div className="skills-wrapper">
+          {/* Left - Skills Cards */}
+          <div className="skills-left">
+            <h2 className="section-subs">My Skills</h2>
+            <div className="mini-cards-container">
+              {data.skills.map((skill, index) => (
+                <div className="mini-skill-card" key={index}>
+                  <img src={skill.image} alt={skill.name} className="mini-skill-image" />
+                  <p className="mini-skill-name">{skill.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right - About Me */}
+          <div className="skills-right">
+            <h2 className="section-subs">About Me</h2>
+            <div className="section-summary">
+                <p>
+                Hi, I’m Pranav Dalve a passionate and focused <strong> Back-End Developer </strong> who loves solving real-world problems through efficient code and clean architecture.
+                </p>
+                <p>
+                My journey began with a deep interest in how systems work behind the scenes. I've honed my skills in building RESTful APIs, managing databases, and developing scalable backend systems using technologies like<strong>  Node.js, MongoDB, and Express</strong>. I also enjoy learning new tools and frameworks that enhance productivity and performance.
+                </p>
+                <p>
+                Beyond just coding, I believe in writing maintainable, well-documented code and collaborating effectively with teams. Whether it’s integrating third-party APIs, designing data models, or debugging performance issues, I thrive on challenges that push me to grow.
+                </p>
+                <p>
+                I'm actively looking for opportunities where I can contribute to innovative solutions and continue building impactful software.
+                </p>
+                <p>
+                  Feel free to connect with me on{' '}
+                  <a
+                    href="https://linkedin.com/in/pranavdalve"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#6210bf', textDecoration: 'underline' }}
+                  >
+                    LinkedIn
+                  </a>{' '}
+                  or check out my projects on{' '}
+                  <a
+                    href="https://github.com/PranavDalve"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#6210bf', textDecoration: 'underline' }}
+                  >
+                    GitHub
+                  </a>.
+                </p>
+              </div>
+              <button className="contact-button" onClick={() => setIsModalOpen(true)}>Contact Me</button>
+
+              {isModalOpen && (
+                
+                <div className="contact-modal">
+                  <img src={data.logo} alt="Logo" className="contact-logo" />
+                  <button className="close-icon" onClick={closeModal}>
+                    <i className="fas fa-times"></i>
+                  </button>
+                  <p className="contact-title">Thanks for reaching me <br /> I'm excited to hear from you!</p>
+                  <form ref={form} onSubmit={sendEmail} className="contact-form">
+                    <input type="text" name="user_name" placeholder="Your Name" required />
+                    <input type="email" name="user_email" placeholder="Your Email" required />
+                    <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                  </form>
+                </div>
+              )}
+          </div>
+        </div>
+      </div>
+
+      {/* Expierence Section */}
+      <div className="experience-section" id="experience">
+        <h2 className="experience-title">Work Experience</h2>
+        <div className="experience-timeline">
+          {data.experience.map((item, index) => (
+            <div className="timeline-item" key={index}>
+              <div className="timeline-dot"></div>
+              <div className="timeline-content">
+                <span className="experience-duration">{item.duration}</span>
+                <h3 className="experience-role">{item.role}</h3>
+                <h4 className="experience-company">{item.company}</h4>
+                <div className="experience-desc">
+                  {item.description.split('\n').map((line, i) => (
+                    <p key={i}>{line}</p>
+                  ))}
+                </div>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      
-      {/* Projects Section */}
-       <div className="projects-section" id="projects">
-        <h2 className="projects-title">Projects</h2>
+      {/* Projet Section */}
+
+      <div className="projects-section" id="projects">
+        <h2 className="projects-title">My Work Journey</h2>
         <div className="projects-grid">
           {data.projects.map((project, index) => (
-            <div className={`project-card ${index === 0 ? 'internship' : ''}`} key={index}>
-              <span className="project-tag">{index === 0 ? 'Internship' : 'College Project'}</span>
+            <div className="project-card" key={index}>
+              <img src={project.titleImage} alt={project.title} className="project-thumbnail" />
               <h3 className="project-name">{project.title}</h3>
-              <p className="project-description">{project.description}</p>
-              <ul className="project-points">
-                {project.points.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
+              <button className="see-more-button" onClick={() => setSelectedProject(project)}>
+                See More
+              </button>
             </div>
           ))}
-
-          {/* Placeholder Cards */}
-          {/* {[...Array(5 - data.projects.length)].map((_, idx) => (
-            <div className="project-card placeholder-card" key={`placeholder-${idx}`}>
-              <h3 className="project-name">Coming Soon</h3>
-            </div>
-          ))} */}
         </div>
+
+        {/* Modal or Tab-like Project Detail View */}
+        {selectedProject && (
+        <div className="project-full-modal">
+          <div className="modal-header">
+            {/* <img src={data.logo} alt="Logo" className="modal-logo" /> */}
+            <button className="modal-close" onClick={() => setSelectedProject(null)}>&times;</button>
+          </div>
+          <div className="modal-body">
+            <h2 className="modal-title">{selectedProject.title}</h2>
+            <div className="modal-content-area">
+              <div className="modal-left">
+                <h4>Technologies Used</h4>
+                <div className="modal-images">
+                  {selectedProject.images?.map((img, i) => (
+                    <img key={i} src={img} alt={`Tech ${i}`} className="modal-tech-image" />
+                  ))}
+                </div>
+              </div>
+              <div className="modal-details paragraph-block">
+                <h4>More about the Project</h4>
+                <div className="modal-description">
+                  {selectedProject.description.map((para, index) => (
+                    <p key={index}>
+                      {para}
+                    </p>
+                  ))}
+
+                  {selectedProject.github && (
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="github-button"
+                      >
+                        <i className="fab fa-github fa-beat --fa-animation-duration: 2s"></i>
+                      </a>
+                    )}
+                </div>             
+                {/* <ul>
+                  {selectedProject.technologies.map((tech, i) => (
+                    <li key={i}>{tech}</li>
+                  ))}
+                </ul> */}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="download-cv-wrapper">
+      <a href="/Pranav_Dalve_resume.pdf" download className="download-cv-button">
+        <i className="fas fa-download" style={{ marginRight: '8px' }}></i>
+        Download CV
+      </a>
+    </div>
       </div>
 
 
       {/* Connect Section */}
-      <div className="connect-section" id="connect">
-        <h2 className="connect-title">Let's Connect</h2>
-        <div className="connect-grid">
-          
-          {/* Email Card */}
-          <div className="connect-card">
-            <img src="/skills/email.png" alt="Email" className="connect-image" />
-            <p className="connect-info">{data.email}</p>
-            <button className="copy-btn" onClick={() => copyToClipboard(data.email)}>
-              <i class="fa-solid fa-copy"></i>
+      <div className="contact-page-section" id="connect">
+        <h2 className="contact-title">Let's Connect</h2>
+
+        <div className="contact-page-container">
+
+          <form ref={form} onSubmit={sendEmail} className="contact-form">
+            <input
+              type="text"
+              name="user_name"
+              placeholder="Your Name"
+              required
+              className="contact-input"
+            />
+            <input
+              type="email"
+              name="user_email"
+              placeholder="Your Email"
+              required
+              className="contact-input"
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows="6"
+              required
+              className="contact-textarea"
+            ></textarea>
+            <button type="submit" className="contact-submit">
+              Send Message
             </button>
-          </div>
+          </form>
+        </div>
+        <div className="button-group">
+                <button type="button" className='clear-button' onClick={clearForm}>Clear Text</button>
+        </div>
+      </div>
 
-    {/* LinkedIn Card */}
-    <div className="connect-card">
-      <img src="/skills/linkedin.png" alt="LinkedIn" className="connect-image" />
-      <p className="connect-info">
-        <a href={data.linkedin} target="_blank" rel="noopener noreferrer">
-          pranavdalve
-        </a>
-      </p>
-      {/* <button className="copy-btn" onClick={() => copyToClipboard(data.linkedin)}>
-        Click on the link
-      </button> */}
-    </div>
-
-    {/* Phone Card */}
-    <div className="connect-card">
-      <img src="/skills/phone.png" alt="Phone" className="connect-image" />
-      <p className="connect-info">{data.phone}</p>
-      <button className="copy-btn" onClick={() => copyToClipboard(data.phone)}>
-        <i class="fa-solid fa-copy"></i>
-      </button>
-    </div>
-
-    
-
-  </div>
-</div>
         {/* Resume Section */}
-        <div className="resume-section" id="resume">
-          <h2 className="section-title resume-title">Resume</h2>
-          <div className="resume-content">
-            <div className="resume-preview">
-              <img src="/resume-icon.jpg" alt="Resume Preview" className="resume-image" />
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="download-button">
-                Download Resume
-              </a>
-              <p className="resume-text">You can view or download my resume using the button above.</p>
+        <footer className="footer">
+          <div className="footer-content">
+            <h3 className="footer-name">Pranav Dalve</h3>
+            <p className="footer-tagline">Always building, always learning.</p>
+            <div className="footer-icons">
+              <a href="https://github.com/PranavDalve" target="_blank"><i className="fab fa-github"></i></a>
+              <a href="https://linkedin.com/in/pranavdalve" target="_blank"><i className="fab fa-linkedin-in"></i></a>
+              <a href="https://instagram.com/dalvepranav" target="_blank"><i className="fab fa-instagram"></i></a>
+              <a href="mailto:pranavudalve@gmail.com"><i className="fas fa-envelope"></i></a>
             </div>
           </div>
-        </div>
 
+          <div className="footer-bottom">
+            <p>© 2025 Pranav Dalve. All rights reserved.</p>
+          </div>
+        </footer>
     </>
   );
 }
 
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text);
-  alert("Copied to clipboard: " + text);
-}
 
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'data.json');

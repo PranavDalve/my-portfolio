@@ -11,41 +11,82 @@
     "logo": "/skills/logo.jpg",
     "skills": [
       { "name": "JavaScript", "image": "/skills/javascript.png" },
-      { "name": "OOP in JavaScript", "image": "/skills/oop.png" },
+      { "name": "OOP (JS)", "image": "/skills/oop.png" },
       { "name": "Node.js", "image": "/skills/nodejs.png" },
       { "name": "Express.js", "image": "/skills/express.png" },
       { "name": "MongoDB", "image": "/skills/mongodb.png" },
       { "name": "SQL", "image": "/skills/sql.png" }
     ],
-    "projects": [
+
+    "experience": [
       {
-        "title": "Component Equivalency Finder Web Application",
-        "description": "A web app to find electronic part equivalents for sourcing.",
-        "points": [
-          "Built a Node.js-based web app to match manufacturer codes with in-house equivalents.",
-          "Integrated third-party APIs for real-time component data.",
-          "Implemented full CRUD and file export features for reporting.",
-          "Used Python, Node.js, JavaScript, and MongoDB for backend development."
-        ]
-      },
-      {
-        "title": "Comprehensive Fitness Club Management System",
-        "description": "Web app to manage gym memberships and plans.",
-        "points": [
-          "Developed RESTful APIs with Node.js and Express for diet/fitness plans.",
-          "Managed MongoDB database for user and plan storage.",
-          "Integrated backend with React frontend via APIs."
-        ]
-      },
-      {
-        "title": "Hospital Management System",
-        "description": "Java and SQL-based system for hospital records.",
-        "points": [
-          "Designed Java-based frontend for tracking beds and medicines.",
-          "Used SQL for storing and retrieving hospital data.",
-          "Connected Java and SQL with JDBC."
-        ]
+        "duration": "2023 - 2024",
+        "role": "Web Developer Intern",
+        "company": "Millennium Semiconductor",
+        "description": "A distribution and tech-driven company specializing in electronic parts and devices.\n\n\n• Developed user-friendly web interfaces using Python, Django, SQL, and JavaScript.\n• Collaborated with developers for efficient feature implementation.\n• Built both Front-End and Back-End solutions to address supply-related issues using modern web development practices."
       }
+    ],
+
+
+    "projects": [
+        {
+          "title": "Equicom",
+          "titleImage":"/project/comp-equi.png",
+          "description": [
+            "Equicom is a Django-based web application that helps identify in-house alternatives for external electronic components. It allows engineers and procurement teams to map manufacturer codes to internal inventory with ease.",
+            
+            "It integrates third-party APIs to fetch real-time data such as specifications, availability, and pricing. A relational database with full CRUD functionality supports reliable and organized component management.",
+            
+            "The application also includes a file export feature to generate detailed component matching reports. Built using Python, Django REST Framework, and SQL, it enhances sourcing accuracy and procurement efficiency."
+          ],
+          "technologies": ["Node.js", "Python", "JavaScript", "MongoDB"],
+          "images": ["/project/technologies/python.png", "/project/technologies/django.png","/project/technologies/javascript.png","/project/technologies/sql.png"]
+        },
+        {
+          "title": "FitHub ",
+          "titleImage":"/project/fitness-club.png",
+          "description": [
+            "FitHub is a web application designed to manage gym memberships and deliver personalized fitness and diet plans for users. It streamlines gym administration and enhances user engagement through tailored health solutions.",
+            "RESTful APIs were developed using Node.js and Express to support user authentication and dynamic diet plan generation. MongoDB was used as the backend database to store user profiles, workout routines, and nutritional plans efficiently.",
+            "Close collaboration with frontend developers enabled smooth API integration with the React interface. This ensured seamless data exchange, responsive design, and a user-friendly experience across both web and mobile platforms."
+          ],
+          "technologies": ["Node.js", "Express", "MongoDB", "React"],
+          "images": ["/project/technologies/nodejs.png", "/project/technologies/express.png", "/project/technologies/mongodb.png", "/project/technologies/javascript.png"],
+          "github": "https://github.com/PranavDalve/fitness"
+        },
+        {
+          "title": "MediTrack",
+          "titleImage":"/project/hospital.png",
+          "description": [
+            "MediTrack is a Java and SQL-based system developed to monitor and manage critical hospital operations including patient records, bed occupancy, and medicine stock levels. The system is designed to streamline administrative workflows in healthcare facilities.",
+            "The frontend interface was built using Java, allowing hospital staff to easily enter, update, and search for patient details, bed availability, and medicine inventory. The user interface aimed for clarity, speed, and reliability in fast-paced medical environments.",
+            "On the backend, SQL was used to structure and handle the storage and retrieval of hospital data. Java Database Connectivity (JDBC) was utilized to establish secure and efficient connections between the Java application and the SQL database."
+          ],
+          "technologies": ["Java", "SQL", "JDBC"],
+          "images": ["/project/technologies/sql.png"]
+        },
+        {
+          "title": "Authify",
+          "titleImage":"/project/auth-api.png",
+          "description": [
+            "Authify is a backend-only authentication API built using Node.js and Express to provide secure and reusable user authentication services for any application. It supports user registration, login, password management, and token-based session handling.",
+            "The system implements JWT-based authentication and includes middleware for role-based access control, making it adaptable for admin and regular user permissions. Input validation and error handling were also integrated to ensure security and robustness.",
+            "Built with a modular folder structure, MongoDB for data storage, and bcrypt for password hashing, Authify can be easily plugged into other applications as a standalone authentication module."
+          ],
+          "technologies": ["Node.js", "Express", "JWT", "MongoDB"],
+          "images": ["/project/technologies/javascript.png", "/project/technologies/nodejs.png", "/project/technologies/express.png", "/project/technologies/mongodb.png"]
+        },
+        {
+          "title": "Vidly",
+          "titleImage":"/project/vidly.png",
+          "description": [
+            "Vidly is a backend API for a video rental application, built using Node.js, Express, and MongoDB. It allows for managing movies, customers, rentals, and user accounts with full CRUD functionality.",
+            "The project includes user authentication and role-based authorization using access tokens (JWT) and hashed passwords via bcrypt. Users are required to log in before performing protected operations like rentals or admin tasks.",
+            "Although MongoDB is non-relational, relational modeling was implemented using Mongoose to simulate connections between entities like movies, customers, and rentals. The system also features centralized error handling to ensure consistent and maintainable responses."
+          ],          
+          "technologies": ["Node.js", "Express", "JWT", "MongoDB"],
+          "images": ["/project/technologies/javascript.png", "/project/technologies/nodejs.png", "/project/technologies/express.png", "/project/technologies/mongodb.png"]        }
+      
     ],
 
     "education": [
@@ -86,7 +127,5 @@
         "value": "+91 7888295202"
       }
     ]
-    
-    
   }
   
