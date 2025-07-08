@@ -30,6 +30,30 @@
 
     "projects": [
         {
+          "title": "Authify",
+          "titleImage":"/project/auth-api.png",
+          "description": [
+            "Authify is a backend-only authentication API built using Node.js and Express to provide secure and reusable user authentication services for any application. It supports user registration, login, password management, and token-based session handling.",
+            "The system implements JWT-based authentication and includes middleware for role-based access control, making it adaptable for admin and regular user permissions. Input validation and error handling were also integrated to ensure security and robustness.",
+            "Built with a modular folder structure, MongoDB for data storage, and bcrypt for password hashing, Authify can be easily plugged into other applications as a standalone authentication module."
+          ],
+          "technologies": ["Node.js", "Express", "JWT", "MongoDB"],
+          "images": ["/project/technologies/javascript.png", "/project/technologies/nodejs.png", "/project/technologies/express.png", "/project/technologies/mongodb.png"],
+          "github": "https://github.com/PranavDalve/Authify.git"
+        },
+        {
+          "title": "Vidly",
+          "titleImage":"/project/vidly.png",
+          "description": [
+            "Vidly is a backend API for a video rental application, built using Node.js, Express, and MongoDB. It allows for managing movies, customers, rentals, and user accounts with full CRUD functionality.",
+            "The project includes user authentication and role-based authorization using access tokens (JWT) and hashed passwords via bcrypt. Users are required to log in before performing protected operations like rentals or admin tasks.",
+            "Although MongoDB is non-relational, relational modeling was implemented using Mongoose to simulate connections between entities like movies, customers, and rentals. The system also features centralized error handling to ensure consistent and maintainable responses."
+          ],          
+          "technologies": ["Node.js", "Express", "JWT", "MongoDB"],
+          "images": ["/project/technologies/javascript.png", "/project/technologies/nodejs.png", "/project/technologies/express.png", "/project/technologies/mongodb.png"],
+          "github": "https://github.com/PranavDalve/Vidly-.git"
+        },
+        {
           "title": "Equicom",
           "titleImage":"/project/comp-equi.png",
           "description": [
@@ -64,28 +88,7 @@
           ],
           "technologies": ["Java", "SQL", "JDBC"],
           "images": ["/project/technologies/sql.png"]
-        },
-        {
-          "title": "Authify",
-          "titleImage":"/project/auth-api.png",
-          "description": [
-            "Authify is a backend-only authentication API built using Node.js and Express to provide secure and reusable user authentication services for any application. It supports user registration, login, password management, and token-based session handling.",
-            "The system implements JWT-based authentication and includes middleware for role-based access control, making it adaptable for admin and regular user permissions. Input validation and error handling were also integrated to ensure security and robustness.",
-            "Built with a modular folder structure, MongoDB for data storage, and bcrypt for password hashing, Authify can be easily plugged into other applications as a standalone authentication module."
-          ],
-          "technologies": ["Node.js", "Express", "JWT", "MongoDB"],
-          "images": ["/project/technologies/javascript.png", "/project/technologies/nodejs.png", "/project/technologies/express.png", "/project/technologies/mongodb.png"]
-        },
-        {
-          "title": "Vidly",
-          "titleImage":"/project/vidly.png",
-          "description": [
-            "Vidly is a backend API for a video rental application, built using Node.js, Express, and MongoDB. It allows for managing movies, customers, rentals, and user accounts with full CRUD functionality.",
-            "The project includes user authentication and role-based authorization using access tokens (JWT) and hashed passwords via bcrypt. Users are required to log in before performing protected operations like rentals or admin tasks.",
-            "Although MongoDB is non-relational, relational modeling was implemented using Mongoose to simulate connections between entities like movies, customers, and rentals. The system also features centralized error handling to ensure consistent and maintainable responses."
-          ],          
-          "technologies": ["Node.js", "Express", "JWT", "MongoDB"],
-          "images": ["/project/technologies/javascript.png", "/project/technologies/nodejs.png", "/project/technologies/express.png", "/project/technologies/mongodb.png"]        }
+        }
       
     ],
 
